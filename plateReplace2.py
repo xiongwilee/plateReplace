@@ -15,7 +15,7 @@ def imageProcess(gray):
     # sobel = cv2.convertScaleAbs(cv2.Sobel(gaussian, cv2.CV_16S, 0, 1, ksize=3))
     # return sobel
     # 二值化
-    ret, binary = cv2.threshold(gaussian, 150, 255, cv2.THRESH_BINARY)
+    ret, binary = cv2.threshold(gaussian, 130, 255, cv2.THRESH_BINARY)
 
     # 对二值化后的图像进行闭操作
     element = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 4))
@@ -58,7 +58,7 @@ def findPlateNumberRegion(img):
         # 计算高和宽
         height = abs(box[0][1] - box[2][1])
         width = abs(box[0][0] - box[2][0])
-        # print("the height&width is: %(height)s %(width)s" % {'height':height,'width':width})
+        print("the height&width is: %(height)s %(width)s" % {'height':height,'width':width})
 
         # 正常情况车牌长高比在1.5-3之间
         ratio = float(width) / float(height)
@@ -108,7 +108,7 @@ def detect(img, replaceImg):
 
 
 if __name__ == '__main__':
-        imagePath = './img/1.jpg' # 图片路径
+        imagePath = './img/6.jpg' # 图片路径
         img = cv2.imread(imagePath)
 
         replaceImgPath = './img/replace.jpg' # 替换图片路径
