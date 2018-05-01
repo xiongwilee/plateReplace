@@ -108,7 +108,7 @@ def detect(img, replaceImg):
 
 
 if __name__ == '__main__':
-        imagePath = './img/6.jpg' # 图片路径
+        imagePath = './img/1.jpg' # 图片路径
         img = cv2.imread(imagePath)
 
         replaceImgPath = './img/replace.jpg' # 替换图片路径
