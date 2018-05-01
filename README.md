@@ -11,7 +11,7 @@ python3 / openCV 3.x
 ### 运行
 
 ```shell
-$ python plateReplace2.py
+$ python plateReplace.py
 ```
 
 ## TODO
