@@ -9,7 +9,7 @@ maxPlateRatio = 3 # 车牌最大比例
 # 图像处理
 def imageProcess(gray):
     # 高斯平滑
-    gaussian = cv2.GaussianBlur(gray, (7, 7), 0, 0, cv2.BORDER_DEFAULT)
+    gaussian = cv2.GaussianBlur(gray, (5, 5), 0, 0, cv2.BORDER_DEFAULT)
     
     # Sobel算子，X方向求梯度
     # sobel = cv2.convertScaleAbs(cv2.Sobel(gaussian, cv2.CV_16S, 0, 1, ksize=3))
@@ -20,10 +20,11 @@ def imageProcess(gray):
     # 对二值化后的图像进行闭操作
     element = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 4))
     closed = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, element)
-
+    
     # 再通过腐蚀->膨胀 去掉比较小的噪点
     erosion = cv2.erode(closed, None, iterations=2)
     dilation = cv2.dilate(erosion, None, iterations=2)
+    cv2.imshow("img",dilation)
 
     # 返回最终图像
     return dilation
@@ -108,7 +109,8 @@ def detect(img, replaceImg):
 
 
 if __name__ == '__main__':
-        imagePath = './img/1.jpg' # 图片路径
+        imgName = '4'
+        imagePath = './img/'+imgName+'.jpg' # 图片路径
         img = cv2.imread(imagePath)
 
         replaceImgPath = './img/replace.jpg' # 替换图片路径
@@ -116,8 +118,8 @@ if __name__ == '__main__':
 
         img, imgLogo = detect(img, replaceImg)
 
-        cv2.imwrite('./img/1_position.jpg', img)
-        cv2.imwrite('./img/1_logo.jpg', imgLogo)
+        cv2.imwrite('./img/'+imgName+'_position.jpg', img)
+        cv2.imwrite('./img/'+imgName+'_logo.jpg', imgLogo)
 
-        cv2.imshow("img",img)
+        # cv2.imshow("img",img)
         cv2.waitKey(0)
